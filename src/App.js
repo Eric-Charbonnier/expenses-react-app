@@ -25,9 +25,15 @@ const App = () => {
     },
   ];
 
+  const addExpenseHandler = (expense) => {
+    console.log("In App.js");
+    console.log(expense);
+  };
+
   return (
     <div>
-      <NewExpense />
+      {/* onAddExpense is a function pointer wich is past as an argument puis on ajout un pointer vers {addExpenseHandler} sans les () a la fin pour pas que ca s execute */}
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} /> 
     </div>
   );
