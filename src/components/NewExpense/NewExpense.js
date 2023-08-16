@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
 
 const NewExpense = (props) => {
+  const [isEditing, setEditing] = useState(false);
+
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData, // spread operator
@@ -13,9 +15,14 @@ const NewExpense = (props) => {
     props.onAddExpense(expenseData);
   };
 
+  const startEditingHandler = () => {
+    setEditing(true);
+  };
+
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+      {!isEditing && <button onClick={startEditingHandler}>ADD NEW EXPENSE</button>}
+      {isEditing && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />}
     </div>
   );
 };
